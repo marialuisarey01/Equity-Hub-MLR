@@ -482,7 +482,7 @@ header.app .btn:hover{ background:#FFFFFF !important; border-color:#FFFFFF !impo
 .tab-btn{ padding:13px 18px; }
 
 /* Marco: filete dorado delgado alrededor del header navy */
-header.app{ background:#0F203A !important; box-shadow:inset 0 0 0 2px #B18E57 !important; }
+header.app{ background:#0F203A !important; box-shadow:none !important; border-bottom:2px solid #B18E57 !important; }
 header.app > .wrap{ background:transparent; }
 nav.tabs > .wrap{ background:#0F203A; }
 
@@ -503,10 +503,10 @@ header.app .macro-row{ margin-top:16px; }
 
 <!-- Overlay de login (Google Identity Services). Se oculta tras una sesión válida;
      el bloqueo real de datos ocurre en el Apps Script, no acá (ver initLogin/arrancarApp). -->
-<div id="loginOverlay" style="position:fixed;inset:0;z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#1E2F4D;color:#FBF7EF;font-family:'Libre Franklin',sans-serif;text-align:center;padding:24px">
+<div id="loginOverlay" style="position:fixed;inset:0;z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#0B1626;color:#FBF7EF;font-family:'Libre Franklin',sans-serif;text-align:center;padding:24px">
   <div style="font-family:Georgia,serif;font-size:30px;letter-spacing:.06em;text-transform:uppercase">Capital Hub</div>
-  <div style="font-size:14px;color:#AEB9C8;max-width:340px">Suscríbete para ingresar. Tu nombre identificará tu sesión.</div>
-  <input id="subNombre" type="text" placeholder="Nombre y apellido" autocomplete="name" style="width:300px;max-width:80vw;padding:12px 14px;font-size:15px;border:1.5px solid #AEC8E8;background:#16243B;color:#FBF7EF;outline:none" /><input id="subEmail" type="email" placeholder="Correo (opcional)" autocomplete="email" style="width:300px;max-width:80vw;padding:12px 14px;font-size:15px;border:1.5px solid #AEC8E8;background:#16243B;color:#FBF7EF;outline:none" /><button id="subBtn" style="width:300px;max-width:80vw;padding:12px 14px;font-size:14px;letter-spacing:.12em;text-transform:uppercase;border:none;background:#B08D57;color:#152238;cursor:pointer;font-weight:700;letter-spacing:.12em">Suscribirme e ingresar</button>
+  <div style="font-size:14px;color:#AEB9C8;max-width:340px">Ingresa tu nombre para acceder.</div>
+  <input id="subNombre" type="text" placeholder="Nombre y apellido" autocomplete="name" style="width:300px;max-width:80vw;padding:12px 14px;font-size:15px;border:1.5px solid #AEC8E8;background:#16243B;color:#FBF7EF;outline:none" /><input id="subEmail" type="email" placeholder="Correo (opcional)" autocomplete="email" style="width:300px;max-width:80vw;padding:12px 14px;font-size:15px;border:1.5px solid #AEC8E8;background:#16243B;color:#FBF7EF;outline:none" /><button id="subBtn" style="width:300px;max-width:80vw;padding:12px 14px;font-size:14px;letter-spacing:.12em;text-transform:uppercase;border:none;background:#FFFFFF;color:#B08D57;cursor:pointer;font-weight:700;letter-spacing:.12em">Ingresar</button>
   <div id="loginError" style="display:none;font-size:13px;color:#E08585;max-width:300px"></div>
 </div>
 
