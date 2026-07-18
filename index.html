@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wild Lama — Tesorería e Inversión de Excedentes</title>
+<title>Inversiones de Excedentes</title>
 
 <!-- Fuentes de marca (Minion Pro local) + utilitarias por CDN con fallback -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -905,7 +905,7 @@ async function onGoogleCredential(idToken){
      debe verificar en doPost que el email del token esté en la misma
      lista de administradores ANTES de escribir en la planilla.
    ============================================================ */
-const ADMIN_EMAILS = ["marialuisa.rey@wildlama.com"]; // <-- correos con permiso de edición (minúsculas)
+const ADMIN_EMAILS = ["marialuisarey01@gmail.com"]; // <-- correos con permiso de edición (minúsculas)
 const EMAIL_KEY = "wl_email";
 function getUserEmail(){ return (localStorage.getItem(EMAIL_KEY)||"").toLowerCase(); }
 function setUserEmail(e){ if(e) localStorage.setItem(EMAIL_KEY, String(e).toLowerCase()); }
