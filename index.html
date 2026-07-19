@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Registro Inversiones</title>
+<title>Wild Lama — Tesorería e Inversión de Excedentes</title>
 
 <!-- Fuentes de marca (Minion Pro local) + utilitarias por CDN con fallback -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -496,6 +496,14 @@ header.app .macro-row{ margin-top:16px; }
 
 /* Botones del header más pequeños (según ajuste directo) */
 .hdr-tools .btn{ font-size:8px; }
+
+/* Unificar tono azul de toda la parte superior (header + nav) */
+nav.tabs{ background:#0F203A !important; border-bottom-color:#0F203A !important; }
+
+/* Franja superior: un solo tono navy. Pestañas inactivas sin relleno claro */
+.tab-btn{ background:transparent !important; border-color:rgba(255,255,255,.22) !important; }
+.tab-btn:hover{ background:rgba(255,255,255,.10) !important; border-color:rgba(255,255,255,.4) !important; }
+.tab-btn.active{ background:var(--cream) !important; color:var(--navy) !important; border-color:var(--cream) !important; }
 </style>
 <script>/* GSI deshabilitado: versión local sin login */</script>
 </head>
@@ -504,7 +512,14 @@ header.app .macro-row{ margin-top:16px; }
 <!-- Overlay de login (Google Identity Services). Se oculta tras una sesión válida;
      el bloqueo real de datos ocurre en el Apps Script, no acá (ver initLogin/arrancarApp). -->
 <div id="loginOverlay" style="position:fixed;inset:0;z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#0B1626;color:#FBF7EF;font-family:'Libre Franklin',sans-serif;text-align:center;padding:24px">
-  <div style="font-family:Georgia,serif;font-size:30px;letter-spacing:.06em;text-transform:uppercase">Capital Hub</div>
+  <svg width="132" height="132" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" style="flex:0 0 auto;margin-bottom:6px">
+    <rect x="0" y="0" width="320" height="320" fill="#B08D57"/>
+    <rect x="12" y="12" width="296" height="296" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-opacity="0.7"/>
+    <text x="160" y="168" text-anchor="middle" font-family="'Cormorant Garamond',Georgia,serif" font-size="116" font-weight="600" letter-spacing="4" fill="#FFFFFF">M<tspan fill="#1E2F4D">L</tspan>R</text>
+    <line x1="96" y1="200" x2="224" y2="200" stroke="#FFFFFF" stroke-width="1.25" stroke-opacity="0.8"/>
+    <text x="160" y="236" text-anchor="middle" font-family="'Libre Franklin',Arial,sans-serif" font-size="20" letter-spacing="6" fill="#1E2F4D">CORPORATE FINANCE</text>
+  </svg>
+  <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;letter-spacing:.06em;text-transform:uppercase">Equity Hub</div>
   <div style="font-size:14px;color:#AEB9C8;max-width:340px">Ingresa tu nombre para acceder.</div>
   <input id="subNombre" type="text" placeholder="Nombre y apellido" autocomplete="name" style="width:300px;max-width:80vw;padding:12px 14px;font-size:15px;border:1.5px solid #AEC8E8;background:#16243B;color:#FBF7EF;outline:none" /><input id="subEmail" type="email" placeholder="Correo (opcional)" autocomplete="email" style="width:300px;max-width:80vw;padding:12px 14px;font-size:15px;border:1.5px solid #AEC8E8;background:#16243B;color:#FBF7EF;outline:none" /><button id="subBtn" style="width:300px;max-width:80vw;padding:12px 14px;font-size:14px;letter-spacing:.12em;text-transform:uppercase;border:none;background:#FFFFFF;color:#B08D57;cursor:pointer;font-weight:700;letter-spacing:.12em">Ingresar</button>
   <div id="loginError" style="display:none;font-size:13px;color:#E08585;max-width:300px"></div>
@@ -532,7 +547,7 @@ header.app .macro-row{ margin-top:16px; }
   <text x="160" y="238" text-anchor="middle" font-family="'Libre Franklin',Arial,sans-serif" font-size="17" font-weight="600" letter-spacing="3.6" fill="#1E2F4D">CORPORATE FINANCE</text>
 </svg>
         <div>
-          <h1 style="text-transform:uppercase;letter-spacing:.04em;font-size:50px">Equity Hub<span style="font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;display:block;margin-top:8px;text-align:center;opacity:.95;font-size:18px;letter-spacing:.03em;text-transform:none;color:#C9A96E">by María Luisa Rey</span></h1>
+          <h1 style="text-transform:uppercase;letter-spacing:.04em;font-size:50px">Equity Hub</h1>
         </div>
       </div>
       <div class="header-status">
@@ -558,6 +573,7 @@ header.app .macro-row{ margin-top:16px; }
       <button class="tab-btn" data-tab="dap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10"/><path d="M19 21V10"/><path d="M9 21V10"/><path d="M15 21V10"/><path d="M12 3 3 8h18l-9-5Z"/></svg>Inversiones DAP</button>
       <button class="tab-btn" data-tab="prestamos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3"/><path d="M20 16H7l3 3"/></svg>Préstamos a terceros</button>
       <button class="tab-btn" data-tab="macro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 3-3 3 3 5-6"/></svg>Evolución macro</button>
+      <button class="tab-btn" data-tab="forwards"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>Forwards inflación</button>
       <button class="tab-btn" data-tab="reglas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4 3.4 7.4 8 9 4.6-1.6 8-5 8-9V6l-8-3Z"/></svg>Políticas de inversiones</button>
     </div>
   </div>
@@ -615,7 +631,6 @@ header.app .macro-row{ margin-top:16px; }
         <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
           <input type="text" inputmode="numeric" id="capitalInput" class="cap-input num" placeholder="$0" autocomplete="off">
           <button class="btn accent sm" id="btnIngresarCapital" type="button" style="font-size:8px">Ingresar</button>
-          <span class="cap-hint" id="capitalHint" style="font-family:var(--font-serif)">Presiona <b>Enter</b> para ver los fondos recomendados.</span>
         </div>
       </div>
     </div>
@@ -752,8 +767,8 @@ header.app .macro-row{ margin-top:16px; }
       <div class="section-head">
         <div>
           <span class="eyebrow sec-eyebrow">Registro</span>
-          <h2>Préstamos a Empresas Relacionadas</h2>
-          <div class="sub">Lleva el registro de préstamos otorgados a empresas relacionadas: contraparte, fecha, monto, tasa, plazo y sistema de amortización. La herramienta calcula la cuota, el interés total y la rentabilidad que genera para Wild Lama, y arma la tabla de amortización de cada préstamo.</div>
+          <h2>Préstamos a Terceros</h2>
+          <div class="sub">Registro de préstamos otorgados a terceros: contraparte, fecha, monto, tasa, plazo y sistema de amortización. La herramienta calcula la cuota, el interés total y la rentabilidad que genera, y arma la tabla de amortización de cada préstamo.</div>
         </div>
         <div class="table-actions">
           <button class="btn accent sm" id="btnAddLoan">Agregar préstamo</button>
@@ -818,6 +833,40 @@ header.app .macro-row{ margin-top:16px; }
   </div>
 </section>
 
+<!-- ==================== TAB: FORWARDS DE INFLACIÓN ==================== -->
+<section class="tab-panel" id="tab-forwards">
+  <div class="wrap">
+    <div class="section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow sec-eyebrow">Registro</span>
+          <h2>Forwards de Inflación</h2>
+          <div class="sub">Registro de forwards de inflación para estimar la inflación esperada. Ingresa el <b>precio spot (UF)</b> y el <b>precio forward</b> de cada tramo (y opcionalmente las tasas UF/CLP). El plazo se calcula automáticamente del <b>9 de cada mes al 9 del mes siguiente</b>, y la <b>inflación implícita</b> se deriva sola. Al guardar, los datos se cargan automáticamente a la planilla (hoja «Forwards»).</div>
+        </div>
+        <div class="table-actions">
+          <button class="btn accent sm" id="btnAddFwd">Agregar forward</button>
+          <button class="btn ghost sm" id="btnSaveFwd">Guardar en planilla</button>
+          <button class="btn ghost sm" id="btnLoadFwd">Cargar guardados</button>
+          <span class="persist-msg" id="persist-forwards"></span>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="table-scroll" style="max-height:none">
+          <table class="data" id="fwdTable"><thead id="fwdHead"></thead><tbody id="fwdBody"></tbody></table>
+        </div>
+        <p style="font-size:11.5px;color:var(--ink-subtle);margin-top:10px;font-family:var(--font-serif);font-style:italic">Inflación implícita del período = Precio forward ÷ Precio spot − 1. La inflación anualizada compone ese valor por (365 ÷ días). Al elegir el «Inicio», el «Vencimiento» se fija automáticamente en el 9 del mes siguiente; puedes ajustarlo manualmente.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div><span class="eyebrow sec-eyebrow">Resultados</span><h2>Inflación esperada</h2><div class="sub">Estimación a partir de los forwards registrados.</div></div></div>
+      <div class="section-body" id="fwdSummary"></div>
+    </div>
+
+    <div class="disclaimer">La inflación implícita es una estimación referencial derivada de los precios forward ingresados; supone base actual/365 y no constituye una proyección oficial ni asesoría financiera. Toda cifra debe validarse con la fuente de mercado correspondiente.</div>
+  </div>
+</section>
+
 <!-- ==================== TAB: MEMO ==================== -->
 <section class="tab-panel" id="tab-memo">
   <div class="wrap">
@@ -856,6 +905,15 @@ function setSessionToken(t){ if(t) localStorage.setItem(SESSION_KEY, t); else lo
 
 /* Agrega el token de sesión a una URL de lectura del Apps Script. */
 function conToken(url){ return url + (url.includes("?")?"&":"?") + "token=" + encodeURIComponent(getSessionToken()); }
+
+/* Avisa al Apps Script que alguien inició sesión (para enviar correo de registro).
+   Fire-and-forget con no-cors: no bloquea ni interrumpe el ingreso. */
+function notificarIngreso(nombre,email){
+  try{
+    var body=new URLSearchParams({accion:"ingreso",nombre:nombre||"",email:email||"",cuando:new Date().toISOString(),ua:navigator.userAgent||""});
+    fetch(BASE_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},body:body.toString()}).catch(function(){});
+  }catch(e){}
+}
 
 /* Lee el `exp` del token sin validar firma (eso lo hace el Apps Script) —
    solo para decidir si mostramos el login sin esperar un round-trip. */
@@ -905,7 +963,7 @@ async function onGoogleCredential(idToken){
      debe verificar en doPost que el email del token esté en la misma
      lista de administradores ANTES de escribir en la planilla.
    ============================================================ */
-const ADMIN_EMAILS = ["marialuisarey01@gmail.com"]; // <-- correos con permiso de edición (minúsculas)
+const ADMIN_EMAILS = ["marialuisa.rey@wildlama.com"]; // <-- correos con permiso de edición (minúsculas)
 const EMAIL_KEY = "wl_email";
 function getUserEmail(){ return (localStorage.getItem(EMAIL_KEY)||"").toLowerCase(); }
 function setUserEmail(e){ if(e) localStorage.setItem(EMAIL_KEY, String(e).toLowerCase()); }
@@ -917,9 +975,9 @@ function injectRbacCSS(){
   const s=document.createElement("style"); s.id="wl-rbac-css";
   s.textContent = "#wlReadonlyBanner{display:none;}"
   + "body.wl-readonly #wlReadonlyBanner{display:block;background:#F4E7EA;border-bottom:1px solid var(--burgundy);color:var(--burgundy);padding:9px 0;font-size:12.5px;font-family:var(--font-label);letter-spacing:.03em;}"
-  + "body.wl-readonly #btnAddInv,body.wl-readonly #btnSaveInv,body.wl-readonly #btnAddLoan,body.wl-readonly #btnSaveLoan,body.wl-readonly #btnAddDap,body.wl-readonly #btnSaveDap{display:none !important;}"
-  + "body.wl-readonly #holdBody .h-del,body.wl-readonly #holdBody .h-up,body.wl-readonly #holdBody .h-down,body.wl-readonly #holdBody .ad-del,body.wl-readonly #holdBody .rd-del,body.wl-readonly #holdBody .ad-add,body.wl-readonly #holdBody .rd-add,body.wl-readonly #loanBody .l-del,body.wl-readonly #dapBody .d-del{display:none !important;}"
-  + "body.wl-readonly #holdBody input,body.wl-readonly #holdBody select,body.wl-readonly #holdBody textarea,body.wl-readonly #loanBody input,body.wl-readonly #loanBody select,body.wl-readonly #loanBody textarea,body.wl-readonly #dapBody input,body.wl-readonly #dapBody select,body.wl-readonly #dapBody textarea{pointer-events:none !important;background:transparent !important;border-color:transparent !important;box-shadow:none !important;-webkit-appearance:none;appearance:none;color:var(--ink);}"
+  + "body.wl-readonly #btnAddInv,body.wl-readonly #btnSaveInv,body.wl-readonly #btnAddLoan,body.wl-readonly #btnSaveLoan,body.wl-readonly #btnAddDap,body.wl-readonly #btnSaveDap,body.wl-readonly #btnAddFwd,body.wl-readonly #btnSaveFwd{display:none !important;}"
+  + "body.wl-readonly #holdBody .h-del,body.wl-readonly #holdBody .h-up,body.wl-readonly #holdBody .h-down,body.wl-readonly #holdBody .ad-del,body.wl-readonly #holdBody .rd-del,body.wl-readonly #holdBody .ad-add,body.wl-readonly #holdBody .rd-add,body.wl-readonly #loanBody .l-del,body.wl-readonly #dapBody .d-del,body.wl-readonly #fwdBody .f-del{display:none !important;}"
+  + "body.wl-readonly #holdBody input,body.wl-readonly #holdBody select,body.wl-readonly #holdBody textarea,body.wl-readonly #loanBody input,body.wl-readonly #loanBody select,body.wl-readonly #loanBody textarea,body.wl-readonly #fwdBody input,body.wl-readonly #fwdBody select,body.wl-readonly #fwdBody textarea,body.wl-readonly #dapBody input,body.wl-readonly #dapBody select,body.wl-readonly #dapBody textarea{pointer-events:none !important;background:transparent !important;border-color:transparent !important;box-shadow:none !important;-webkit-appearance:none;appearance:none;color:var(--ink);}"
   + ".wl-role-chip{display:inline-block;padding:2px 9px;font-family:var(--font-label);text-transform:uppercase;letter-spacing:.12em;font-size:10px;font-weight:600;border:1px solid var(--border-strong);}"
   + ".wl-role-chip.admin{background:#E7ECF2;color:var(--navy);border-color:var(--navy);}"
   + ".wl-role-chip.viewer{background:#F4E7EA;color:var(--burgundy);border-color:var(--burgundy);}";
@@ -928,7 +986,7 @@ function injectRbacCSS(){
 
 function lockRecordInputs(){
   if(esAdmin()) return;
-  ["holdBody","loanBody","dapBody"].forEach(function(bid){
+  ["holdBody","loanBody","dapBody","fwdBody"].forEach(function(bid){
     const b=document.getElementById(bid); if(!b) return;
     b.querySelectorAll("input,select,textarea").forEach(function(el){ el.readOnly=true; el.tabIndex=-1; if(el.tagName==="SELECT") el.disabled=true; });
   });
@@ -954,7 +1012,7 @@ function initAccesoRBAC(){
     const hdr=document.querySelector("header.app"); if(hdr&&hdr.parentNode) hdr.parentNode.insertBefore(bn, hdr.nextSibling);
   }
   aplicarModoAcceso();
-  ["holdBody","loanBody","dapBody"].forEach(function(bid){
+  ["holdBody","loanBody","dapBody","fwdBody"].forEach(function(bid){
     const b=document.getElementById(bid); if(!b) return;
     new MutationObserver(function(){ if(!esAdmin()) lockRecordInputs(); }).observe(b,{childList:true,subtree:true});
   });
@@ -962,7 +1020,7 @@ function initAccesoRBAC(){
   if(lo) lo.addEventListener("click",function(){ localStorage.removeItem("wl_user_name"); localStorage.removeItem(EMAIL_KEY); location.reload(); });
 }
 
-function initLogin(){ var overlay=document.getElementById("loginOverlay"); var nombre=(localStorage.getItem("wl_user_name")||"").trim(); if(nombre){ arrancarApp(); return; } overlay.style.display="flex"; var go=function(){ var n=(document.getElementById("subNombre").value||"").trim(); var e=(document.getElementById("subEmail").value||"").trim(); var err=document.getElementById("loginError"); if(n.length<2){ err.textContent="Escribe tu nombre para continuar."; err.style.display="block"; return; } localStorage.setItem("wl_user_name", n); if(e) setUserEmail(e); arrancarApp(); }; document.getElementById("subBtn").addEventListener("click", go); ["subNombre","subEmail"].forEach(function(id){ document.getElementById(id).addEventListener("keydown",function(ev){ if(ev.key==="Enter") go(); }); }); document.getElementById("subNombre").focus(); }
+function initLogin(){ var overlay=document.getElementById("loginOverlay"); var nombre=(localStorage.getItem("wl_user_name")||"").trim(); if(nombre){ arrancarApp(); return; } overlay.style.display="flex"; var go=function(){ var n=(document.getElementById("subNombre").value||"").trim(); var e=(document.getElementById("subEmail").value||"").trim(); var err=document.getElementById("loginError"); if(n.length<2){ err.textContent="Escribe tu nombre para continuar."; err.style.display="block"; return; } localStorage.setItem("wl_user_name", n); if(e) setUserEmail(e); notificarIngreso(n,e); arrancarApp(); }; document.getElementById("subBtn").addEventListener("click", go); ["subNombre","subEmail"].forEach(function(id){ document.getElementById(id).addEventListener("keydown",function(ev){ if(ev.key==="Enter") go(); }); }); document.getElementById("subNombre").focus(); }
 function _initLoginOLD(){
   if(sesionVigente()){ arrancarApp(); return; }
   setSessionToken("");
@@ -1004,6 +1062,8 @@ const STATE = {
   loanExpanded: {},
   daps: [],
   dapSeq: 0,
+  forwards: [],
+  fwdSeq: 0,
   macroHist: [],
   macroHistSerie: "Dólar",
   filters: null,
@@ -1618,7 +1678,7 @@ function renderMensualMatriz(){
   const col=v=>v>=0?"#2E6B52":"#B03A3A";
   const totMes=[]; for(let mi=0;mi<nMonths;mi++){ totMes[mi]=funds.reduce((a,f)=>a+((f.cel[mi]&&!f.cel[mi].enCurso)?(f.cel[mi].gan||0):0),0); }
   const totFondo=f=>{ let s=0; for(let mi=0;mi<nMonths;mi++){ const c=f.cel[mi]; if(c&&!c.enCurso)s+=c.gan||0; } return s; };
-  const th=`<th class="no-sort" style="text-align:left;position:sticky;left:0;background:var(--surface);z-index:1">Fondo</th>`+
+  const th=`<th class="no-sort" style="text-align:left;position:sticky;left:0;background:var(--navy);color:var(--cream);z-index:1">Fondo</th>`+
     Array.from({length:nMonths},(_,mi)=>`<th class="no-sort right">${MM[mi]}</th>`).join("")+
     `<th class="no-sort right" style="border-left:2px solid var(--rule)">Año</th>`;
   const rows=funds.map(f=>{
@@ -1656,7 +1716,7 @@ function renderSaldoMatriz(){
   const funds=Object.values(g);
   if(!funds.length){ el.innerHTML='<p style="font-family:var(--font-serif);font-style:italic;color:var(--ink-muted);margin:0">Registra saldos por mes en <strong>Inversiones FFMM</strong> para ver aquí la foto contable de fin de mes.</p>'; return; }
   const totMes=[]; for(let mi=0;mi<nMonths;mi++){ totMes[mi]=funds.reduce((a,f)=>a+(f.cel[mi]||0),0); }
-  const th=`<th class="no-sort" style="text-align:left;position:sticky;left:0;background:var(--surface);z-index:1">Fondo</th>`+
+  const th=`<th class="no-sort" style="text-align:left;position:sticky;left:0;background:var(--navy);color:var(--cream);z-index:1">Fondo</th>`+
     Array.from({length:nMonths},(_,mi)=>`<th class="no-sort right">${MM[mi]}</th>`).join("");
   const rows=funds.map(f=>{
     const tds=Array.from({length:nMonths},(_,mi)=>{ const s=f.cel[mi];
@@ -1963,6 +2023,14 @@ const PERSIST = {
     fromRow: r => ({ id:++STATE.loanSeq, contraparte:r.contraparte||"", fecha:normFechaISO(r.fecha), monto:toNum(r.monto)||0, tasa:toNum(r.tasa)||0, plazo:Math.max(0,Math.round(toNum(r.plazo)||0)), sistema:(["frances","lineal","bullet"].includes(r.sistema)?r.sistema:"frances") }),
     target: rows => { STATE.loans = rows; },
     render: () => renderPrestamos()
+  },
+  forwards: {
+    hoja: "Forwards",
+    fields: ["inicio","vencimiento","dias","spot","forward","tasaUF","tasaCLP","inflacion","anual"],
+    toRow: f => { const m=fwdMetrics(f); return { inicio:f.inicio, vencimiento:f.vencimiento, dias:m.dias, spot:f.spot, forward:f.forward, tasaUF:f.tasaUF, tasaCLP:f.tasaCLP, inflacion:(m.impl!=null?+(m.impl*100).toFixed(4):""), anual:(m.anual!=null?+(m.anual*100).toFixed(4):"") }; },
+    fromRow: r => ({ id:++STATE.fwdSeq, inicio:normFechaISO(r.inicio), vencimiento:normFechaISO(r.vencimiento), spot:toNum(r.spot)||0, forward:toNum(r.forward)||0, tasaUF:toNum(r.tasaUF)||0, tasaCLP:toNum(r.tasaCLP)||0 }),
+    target: rows => { STATE.forwards = rows; },
+    render: () => renderForwards()
   }
 };
 /* Normaliza una fecha (ISO string, Date serializada o dd/mm/yyyy) a "yyyy-mm-dd". */
@@ -2640,10 +2708,10 @@ function renderPrestamos(){
       <td class="right num" style="font-weight:600">${m.totalInteres>0?fmtCLP(m.totalInteres):DASH}</td>
       <td class="right num">${m.rentPeriodo===null?DASH:nf2.format(m.rentPeriodo*100)+"%"}</td>
       <td class="right num" style="font-weight:600">${m.rentMensual===null?DASH:nf2.format(m.rentMensual*100)+"%"}</td>
-      <td style="white-space:nowrap"><button class="btn ghost sm l-amort" type="button">${STATE.loanExpanded[l.id]?"Ocultar":"Ver tabla"}</button> <button class="btn ghost sm l-del" type="button">Quitar</button></td>
+      <td style="white-space:nowrap"><button class="btn ghost sm l-del" type="button">Quitar</button></td>
     </tr>`;
     let filaAmort="";
-    if(STATE.loanExpanded[l.id]){
+    if(true){
       const a=amortizacion(l);
       // Semilla editable: si no hay ediciones o cambió el n° de períodos, regenerar desde la propuesta.
       if(!Array.isArray(l.amortEdit)||l.amortEdit.length!==a.filas.length){ l.amortEdit=a.filas.map(f=>({k:f.k,cuota:f.cuota,interes:f.interes,amort:f.amort})); }
@@ -2656,7 +2724,7 @@ function renderPrestamos(){
       const cuadraAmort=Math.abs(totalAmort-m.P)<=Math.max(1,m.P*0.001);
       filaAmort=`<tr class="amort-row"><td colspan="${LOAN_COLS.length}" style="background:var(--surface-2);padding:12px 16px">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px">
-          <div style="font-family:var(--font-label);text-transform:uppercase;letter-spacing:.1em;font-size:11px;color:var(--ink-muted)">Tabla de amortización (editable) — ${escHtml(l.contraparte||"préstamo")} · ${escHtml(LOAN_SISTEMAS[l.sistema])}</div>
+          <div style="font-family:var(--font-label);text-transform:uppercase;letter-spacing:.1em;font-size:11px;color:var(--ink-muted)">Tabla de amortización — ${escHtml(l.contraparte||"préstamo")} · ${escHtml(LOAN_SISTEMAS[l.sistema])}</div>
           <button class="btn ghost sm l-reset" type="button" title="Descartar ediciones y regenerar la propuesta">↻ Recalcular propuesta</button>
         </div>
         ${a.filas.length?`<table class="data" style="width:auto;min-width:560px"><thead><tr><th class="right no-sort">Período</th><th class="right no-sort">Cuota</th><th class="right no-sort">Interés</th><th class="right no-sort">Amortización</th><th class="right no-sort">Saldo</th></tr></thead><tbody>${rows}</tbody>
@@ -2766,6 +2834,80 @@ function overlapDias(aS,aE,bS,bE){ const s=Math.max(aS,bS), e=Math.min(aE,bE); c
 
 function addDap(){ STATE.daps.push({id:++STATE.dapSeq,banco:"",fecha:hoyISO(),monto:0,dias:90,tasa:0}); renderDap(); }
 function removeDap(id){ STATE.daps=STATE.daps.filter(d=>d.id!==id); renderDap(); }
+
+/* ===== Forwards de inflación ===== */
+function fwdIsoOf(d){ const p=n=>String(n).padStart(2,"0"); return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate()); }
+function fwdDefaultInicio(){ const n=new Date(); return fwdIsoOf(new Date(n.getFullYear(), n.getMonth(), 9)); }
+function fwd9NextMonth(iso){ const d=parseISOd(iso)||new Date(); return fwdIsoOf(new Date(d.getFullYear(), d.getMonth()+1, 9)); }
+function fwdMetrics(f){
+  const ini=parseISOd(f.inicio), fin=parseISOd(f.vencimiento);
+  const dias=(ini&&fin)?Math.max(0,Math.round((fin-ini)/86400000)):0;
+  const spot=toNum(f.spot), fwd=toNum(f.forward);
+  let impl=null, anual=null;
+  if(spot&&fwd&&spot>0){ impl=fwd/spot-1; if(dias>0) anual=Math.pow(1+impl,365/dias)-1; }
+  return { dias, spot, fwd, impl, anual };
+}
+function addForward(){
+  let ini = STATE.forwards.length ? (STATE.forwards[STATE.forwards.length-1].vencimiento||fwdDefaultInicio()) : fwdDefaultInicio();
+  STATE.forwards.push({ id:++STATE.fwdSeq, inicio:ini, vencimiento:fwd9NextMonth(ini), spot:0, forward:0, tasaUF:0, tasaCLP:0 });
+  renderForwards();
+}
+function removeForward(id){ STATE.forwards=STATE.forwards.filter(f=>f.id!==id); renderForwards(); }
+const FWD_COLS=["Inicio","Vencimiento","Plazo (días)","Precio Spot (UF)","Precio Forward","Tasa UF %","Tasa CLP %","Inflación implícita %","Inflación anualizada %",""];
+function renderForwards(){
+  const head=document.getElementById("fwdHead"), body=document.getElementById("fwdBody"); if(!head)return;
+  head.innerHTML="<tr>"+FWD_COLS.map((c,i)=>`<th class="${i>=2&&i<=8?'right':''} no-sort">${c}</th>`).join("")+"</tr>";
+  if(!STATE.forwards.length){ body.innerHTML=`<tr><td class="empty-state" colspan="${FWD_COLS.length}">Aún no hay forwards registrados. Usa "Agregar forward" para empezar.</td></tr>`; renderFwdSummary(); return; }
+  body.innerHTML=STATE.forwards.map(f=>{
+    const m=fwdMetrics(f);
+    return `<tr data-id="${f.id}">
+      <td><input type="date" class="f-inicio" value="${escAttr(f.inicio||"")}" aria-label="Inicio"></td>
+      <td><input type="date" class="f-venc" value="${escAttr(f.vencimiento||"")}" aria-label="Vencimiento"></td>
+      <td class="right num f-dias">${m.dias||DASH}</td>
+      <td><input type="text" inputmode="decimal" class="f-spot right num" style="min-width:110px" value="${f.spot?nf2.format(f.spot):""}" placeholder="0,00" aria-label="Precio spot UF"></td>
+      <td><input type="text" inputmode="decimal" class="f-forward right num" style="min-width:110px" value="${f.forward?nf2.format(f.forward):""}" placeholder="0,00" aria-label="Precio forward"></td>
+      <td><input type="text" inputmode="decimal" class="f-tuf right num" style="min-width:78px" value="${f.tasaUF?nf2.format(f.tasaUF):""}" placeholder="0,00" aria-label="Tasa UF"></td>
+      <td><input type="text" inputmode="decimal" class="f-tclp right num" style="min-width:78px" value="${f.tasaCLP?nf2.format(f.tasaCLP):""}" placeholder="0,00" aria-label="Tasa CLP"></td>
+      <td class="right num f-impl" style="font-weight:600">${m.impl!=null?nf2.format(m.impl*100)+"%":DASH}</td>
+      <td class="right num f-anual">${m.anual!=null?nf2.format(m.anual*100)+"%":DASH}</td>
+      <td><button class="btn ghost sm f-del" title="Eliminar">✕</button></td>
+    </tr>`;
+  }).join("");
+  body.querySelectorAll("tr[data-id]").forEach(tr=>{
+    const id=+tr.dataset.id, f=STATE.forwards.find(x=>x.id===id);
+    tr.querySelector(".f-inicio").addEventListener("change",e=>{ f.inicio=e.target.value; f.vencimiento=fwd9NextMonth(f.inicio); renderForwards(); });
+    tr.querySelector(".f-venc").addEventListener("change",e=>{ f.vencimiento=e.target.value; refreshForwardRow(id); });
+    tr.querySelector(".f-spot").addEventListener("input",e=>{ f.spot=toNum(e.target.value)||0; refreshForwardRow(id); });
+    tr.querySelector(".f-forward").addEventListener("input",e=>{ f.forward=toNum(e.target.value)||0; refreshForwardRow(id); });
+    tr.querySelector(".f-tuf").addEventListener("input",e=>{ f.tasaUF=toNum(e.target.value)||0; });
+    tr.querySelector(".f-tclp").addEventListener("input",e=>{ f.tasaCLP=toNum(e.target.value)||0; });
+    tr.querySelector(".f-del").addEventListener("click",()=>removeForward(id));
+  });
+  renderFwdSummary();
+  if(typeof esAdmin==="function" && !esAdmin()) lockRecordInputs();
+}
+function refreshForwardRow(id){
+  const tr=document.querySelector(`#fwdBody tr[data-id="${id}"]`); if(!tr)return;
+  const f=STATE.forwards.find(x=>x.id===id), m=fwdMetrics(f);
+  tr.querySelector(".f-dias").textContent=m.dias||DASH;
+  tr.querySelector(".f-impl").textContent=m.impl!=null?nf2.format(m.impl*100)+"%":DASH;
+  tr.querySelector(".f-anual").textContent=m.anual!=null?nf2.format(m.anual*100)+"%":DASH;
+  renderFwdSummary();
+}
+function renderFwdSummary(){
+  const el=document.getElementById("fwdSummary"); if(!el)return;
+  const valid=STATE.forwards.map(fwdMetrics).filter(m=>m.impl!=null);
+  if(!valid.length){ el.innerHTML=`<p style="color:var(--ink-subtle);font-family:var(--font-serif);font-style:italic">Ingresa precio spot y precio forward para estimar la inflación esperada.</p>`; return; }
+  const acum=valid.reduce((a,m)=>a*(1+m.impl),1)-1;
+  const mensual=Math.pow(1+acum,1/valid.length)-1;
+  const anual=valid[valid.length-1].anual;
+  const card=(lbl,val,strong)=>`<div style="flex:1;min-width:170px;padding:18px 20px;border:1px solid var(--border);border-top:2px solid var(--gold)"><div style="font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-subtle);font-family:var(--font-label)">${lbl}</div><div style="font-family:var(--font-display),Georgia,serif;font-size:30px;color:var(--navy);margin-top:8px">${val}</div></div>`;
+  el.innerHTML=`<div style="display:flex;gap:14px;flex-wrap:wrap">`
+    + card("Inflación esperada acumulada", nf2.format(acum*100)+"%")
+    + card("Inflación mensual promedio", nf2.format(mensual*100)+"%")
+    + card("Inflación anualizada (último forward)", anual!=null?nf2.format(anual*100)+"%":DASH)
+    + `</div><p style="font-size:11.5px;color:var(--ink-subtle);margin-top:10px;font-family:var(--font-serif);font-style:italic">Acumulada compuesta sobre ${valid.length} tramo${valid.length===1?"":"s"} registrado${valid.length===1?"":"s"}.</p>`;
+}
 
 /* Métricas de un DAP. El interés al vencimiento es el dato principal: se
    ingresa y de ahí se derivan la tasa anual y la tasa mensual (base actual/365
@@ -3133,6 +3275,10 @@ function initNav(){
   document.getElementById("btnLoadLoan").addEventListener("click",()=>cargarDeSheet("prestamos",false));
   document.getElementById("btnSaveDap").addEventListener("click",()=>guardarEnSheet("dap"));
   document.getElementById("btnLoadDap").addEventListener("click",()=>cargarDeSheet("dap",false));
+  document.getElementById("btnAddFwd").addEventListener("click",addForward);
+  document.getElementById("btnSaveFwd").addEventListener("click",()=>guardarEnSheet("forwards"));
+  document.getElementById("btnLoadFwd").addEventListener("click",()=>cargarDeSheet("forwards",false));
+  renderForwards();
   document.getElementById("filtersToggle").addEventListener("click",()=>document.getElementById("filtersBox").classList.toggle("collapsed"));
   document.getElementById("btnResetFilters").addEventListener("click",()=>{const c=document.getElementById("chkAllFondos");if(c)c.checked=false;resetFilters();});
   document.getElementById("chkAllFondos").addEventListener("change",e=>{
